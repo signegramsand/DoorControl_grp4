@@ -10,5 +10,10 @@ namespace DoorControl
         {
             throw new NotImplementedException();
         }
+
+        public void NotifyEntryDenied(string id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
