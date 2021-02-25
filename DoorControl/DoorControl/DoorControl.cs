@@ -6,7 +6,7 @@ namespace DoorControl
 {
     public class DoorControl
     {
-        enum Doorstate
+        public enum Doorstate
         {
             DoorClosed,
             DoorOpening,
@@ -14,7 +14,8 @@ namespace DoorControl
             DoorBreached
         }
 
-        private Doorstate state = Doorstate.DoorClosed;
+        public Doorstate state;
+
         public IDoor door { get; set; }
 
         public IAlarm alarm { get; set; }
@@ -26,7 +27,21 @@ namespace DoorControl
 
         public void RequestEntry(string id)
         {
+            if (state == Doorstate.DoorClosed)
+            {
+                bool status = userValidation.ValidateEntryRequest(id);
 
+                if (status)
+                {
+                    door.Open();
+                    entryNotification.NotifyEntryGranted(id);
+                    state = Doorstate.DoorOpening;
+                }
+                else
+                {
+                    entryNotification.NotifyEntryDenied(id);
+                }
+            }
         }
 
         public void DoorOpened()

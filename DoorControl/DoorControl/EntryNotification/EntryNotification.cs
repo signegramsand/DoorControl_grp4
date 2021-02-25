@@ -6,7 +6,7 @@ namespace DoorControl
 {
     public class EntryNotification : IEntryNotification
     {
-        public void NotifyEntryGrante(string id)
+        public void NotifyEntryGranted(string id)
         {
             throw new NotImplementedException();
         }
